@@ -107,7 +107,7 @@ The steps to install this library depend on the IDE you are using. PlatformIO is
    - Add the following line to include the TouchSlider library:
      ```ini
      lib_deps =
-       https://github.com/your-repo/touchslider.git
+       https://github.com/MarcosCarballoV/TouchSlider_ESP32
      ```
 
 2. **Include the Library in Your Code:**
@@ -124,7 +124,7 @@ The steps to install this library depend on the IDE you are using. PlatformIO is
 ### Arduino IDE
 
 1. **Install the TouchSlider Library:**
-   - Download the TouchSlider library from the [GitHub repository](https://github.com/your-repo/touchslider).
+   - Download the TouchSlider library from the [GitHub repository](https://github.com/MarcosCarballoV/TouchSlider_ESP32).
    - Open the Arduino IDE.
    - Go to `Sketch` > `Include Library` > `Add .ZIP Library...`.
    - Select the downloaded TouchSlider library ZIP file to install it.
