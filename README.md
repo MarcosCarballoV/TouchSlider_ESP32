@@ -1,4 +1,8 @@
 # TouchSlider Library for ESP32
+[![PlatformIO](https://img.shields.io/badge/PlatformIO-5.2.1-blue.svg)](https://platformio.org/)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/tu_usuario/tu_repositorio)
+
+## Overview
 The TouchSlider library is designed for ESP32 modules equipped with touch pins. It leverages these capabilities to create an array of touch pads that act as a slider, detecting the direction and position of a finger slide. The library includes features such as sensitivity adjustment, accurate detection, timer-based updates and readings, pause and resume functionalities, and the ability to detect touch on specific pads for unique functions.
 
 <p align="center">
@@ -27,22 +31,220 @@ This is an example of the functionality of a touch slider. However, it can also 
 | Espressif    | ESP32-C2   | ESP8684-MINI-1-H4       | 0          |            |
 | Espressif    | ESP32-C6   | ESP32-C6-MINI-1-N4      | 0          |            |
 | Espressif    | ESP32-H2   | ESP32-H2-MINI-1-N4      | 0          |            |
-
 </div>
+
+</p>
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/82256c81-857d-4016-a889-9af0f98bc8ba" alt="Touch Slider on the ESP32">
+  <br>
+  <em>Touch Slider on the ESP32</em>
+</p>
+
+For more information, refer to the [Espressif API Reference for Touch Element](https://docs.espressif.com/projects/esp-idf/en/v4.3.2/esp32s2/api-reference/peripherals/touch_element.html).
+
+For additional guidance on designing touch pads and sliders in PCB designs, you can refer to the [Touch Sensor Application Note](https://github.com/ESP32DE/esp-iot-solution-1/blob/master/documents/touch_pad_solution/touch_sensor_design_en.md).
 
 ## Features
 
 - **Sensitivity Adjustment:** Configure the sensitivity of the touch pads to detect various touch intensities.
 - **Accurate Detection:** Reliable and precise touch detection across the touch slider.
+- **Gesture Completion:** Automatically completes gestures even if a touch reading is missed.
 - **Timer-Based Updates:** Uses timers for efficient touch data updates and readings.
 - **Pause and Resume:** Ability to pause and resume touch detection.
 - **Edge Detection:** Detects touches on specific pads (edges) to perform different functions apart from sliding.
+- **Enable/Disable Print Data:** Options to enable or disable printing of touch data for debugging and monitoring.
+- **Separate Touch Pad Detection:** Detects each touch pad individually for more detailed interaction handling.
+- **Touch Buttons:** Basic functionality for detecting touch on pads designated as simple buttons, useful for straightforward actions.
+- **Simple Configuration:** Default initial configuration can be modified in the header file to suit specific needs.
 
+## Why This Library
+
+With the ESP32 boards, there are a few libraries that implement touch functionalities, but they are often very basic and lack advanced features. I couldn't find any public libraries that effectively use the touch functions of the ESP32 to implement a touch slider capable of detecting gestures accurately and efficiently.
+
+</p>
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/e87e2509-c57c-43be-b04b-3cd9d3e12b22" alt="Gesture in the Slider">
+  <br>
+  <em>Gesture in the Slider</em>
+</p>
+
+### Key Challenges Addressed:
+
+- **Detection Issues:** Existing libraries often struggle with gesture detection, especially when the gesture is performed quickly. This library aims to provide reliable and precise touch detection across the touch slider.
+  
+- **Swipe Fine Functionality:** A unique feature developed during the course of this project is the "Swipe Fine" functionality. If a pad at the edges of the touch slider is touched for the first time, it is detected as a "Swipe Fine" gesture. This can be configured to perform a different set of actions or act as a single "Swipe." This is particularly useful for making fine adjustments on small sliders where accurate value adjustments with a single swipe can be challenging.
+
+### Advantages:
+
+- **Minimal Configuration:** Compared to other libraries, this one requires minimal configuration to get started.
+- **Efficient Gesture Detection:** Ensures accurate and efficient gesture detection, even for fast gestures.
+- **Comprehensive Touch Functionality:** Beyond basic touch detection, it includes advanced features like edge detection and swipe fine gestures.
+- **Dedicated Touch Slider Implementation:** Specifically designed for implementing touch sliders on ESP32, addressing common issues found in other libraries.
+
+This library aims to fill the gap by providing a robust solution for touch slider implementation on ESP32, with advanced features and reliable gesture detection.
 
 ## Authors
 
 - [@MarcosCarballoV](https://github.com/MarcosCarballoV)
 
+## Dependencies
+
+This library depends on:
+
+- **Arduino Library for ESP32:** Required for basic functionality and development within the PlatformIO environment for the ESP32.
+- **ESP32 Touch Pad Driver:** Provides the necessary functions to work with the touch capabilities of the ESP32.
+- **Ticker Library:** Enables the creation of timers, which are essential for periodically reading the touch pads.
+- **Logger Library:** An additional library included in this repository. It facilitates the visualization of messages in the serial port with different colors, making it very useful for differentiating messages and debugging the code.
+
+## Setup Instructions
+
+The steps to install this library depend on the IDE you are using. PlatformIO is recommended, but the library can also be used with the plain Arduino IDE.
+
+### PlatformIO (Recommended)
+
+1. **Add the Library:**
+   - Open the `platformio.ini` file in your project.
+   - Add the following line to include the TouchSlider library:
+     ```ini
+     lib_deps =
+       https://github.com/your-repo/touchslider.git
+     ```
+
+2. **Include the Library in Your Code:**
+   - In your main `.cpp` or `.ino` file, include the TouchSlider library:
+     ```cpp
+     #include <TouchSlider.h>
+     ```
+
+3. **Upload Your Code:**
+   - Write your code using the TouchSlider library.
+   - Connect your ESP32 board to your computer.
+   - Click the upload button in PlatformIO to compile and upload your code to the board.
+
+### Arduino IDE
+
+1. **Install the TouchSlider Library:**
+   - Download the TouchSlider library from the [GitHub repository](https://github.com/your-repo/touchslider).
+   - Open the Arduino IDE.
+   - Go to `Sketch` > `Include Library` > `Add .ZIP Library...`.
+   - Select the downloaded TouchSlider library ZIP file to install it.
+
+2. **Include the Library in Your Code:**
+   - In your `.ino` file, include the TouchSlider library:
+     ```cpp
+     #include <TouchSlider.h>
+     ```
+
+3. **Upload Your Code:**
+   - Write your code using the TouchSlider library.
+   - Connect your ESP32 board to your computer.
+   - Select the correct board and port from `Tools` > `Board` and `Tools` > `Port`.
+   - Click the upload button to compile and upload your code to the board.
+
+## Get Started
+
+To use this library in your project, you need to include the following headers and set up the touch slider.
+
+### Includes and Definitions
+
+```cpp
+#include "TouchSlider.h"
+#include <Ticker.h>
+
+// Define the threshold percentage for the slider
+#define THRESHOLD_SLIDER  60
+
+// Define the GPIO pins for the slider
+#define SLIDER1_PIN     GPIO_NUM_33 
+#define SLIDER2_PIN     GPIO_NUM_27
+#define SLIDER3_PIN     GPIO_NUM_14 
+#define SLIDER4_PIN     GPIO_NUM_4  
+
+// Array of slider pins
+gpio_num_t arraySlidersPins[] = {    
+  SLIDER1_PIN,
+  SLIDER2_PIN,
+  SLIDER3_PIN,
+  SLIDER4_PIN
+};
+
+// Number of sliders
+size_t numSlidersPins = sizeof(arraySlidersPins) / sizeof(arraySlidersPins[0]);
+
+// TouchSlider object
+TouchSlider touchSlider(arraySlidersPins, THRESHOLD_SLIDER, numSlidersPins);
+
+// Ticker object for updating touch slider
+Ticker _sliderTicker;
+
+// Interval for updating touch slider
+const uint8_t SLIDER_INTERVAL = 200;    // It is not recommended to use values ​​less than 100 milliseconds
+
+// Enum for determining slider direction
+enum { INCREASE, DECREASE };            // You can change the names, depending on your project, example: AUDIO_UP, AUDIO DOWN, BRIGHTNESS UP, BRIGHTNESS DOWN, etc.
+```
+
+### Create Logic/Function for Each Gesture
+It is necessary to create a function that will be repeatedly called by a timer configured in the main program.
+
+```cpp
+void updateTouchSlider() {                                 // Update touch slider
+  // Serial.println("Updating touch slider");              // Debugging
+
+  int8_t swipeStatus = touchSlider.getSwipeStatus();       // Get swipe status
+  if (swipeStatus != 0) {
+    for (int8_t i = 0; i < abs(swipeStatus); ++i) {        // Convert swipe status to absolute value to determine count of iterations
+      if (swipeStatus > 0) 
+        updateAction(INCREASE);                            // This function handles the swipe status in the direction of increase
+      else 
+        updateAction(DECREASE);                            // This function handles the swipe status in the direction of decrease
+    }
+  }
+
+  int8_t swipeStatusFine = touchSlider.getSwipeStatusFine();      // Get swipe status fine
+  if (swipeStatusFine != 0) {
+    for (int8_t i = 0; i < abs(swipeStatusFine); ++i) {           // Convert swipe status fine to absolute value to determine count of iterations
+      if (swipeStatusFine > 0) 
+        updateActionFine(INCREASE);                               // This function handles the fine swipe on the first touch pad on the slider
+      else 
+        updateActionFine(DECREASE);                               // This function handles the fine swipe on the last touch pad on the slider
+    }
+  }
+}
+```
+
+### Configure the TouchSlider and Start
+In your setup, or any other part of the main program that only runs once, use the enable/disable functions to configure the features of this library, such as printing messages or using touch buttons. After configuring, start the continuous reading of the touch slider with `touchSlider.start();`. This reading occurs every 50ms by default but can be changed within the library.
+
+```cpp
+void setup() {
+  Serial.begin(115200);                     // Begin serial communication
+  Serial.println("Serial initialized");     // Debugging
+
+  touchSlider.disableTouchButtons();
+  touchSlider.disablePrintButtonTouched();
+ 
+  touchSlider.start();                          // Start touch slider
+  Serial.println("TouchSlider initialized");    // Debugging
+  _sliderTicker.attach_ms(SLIDER_INTERVAL, updateTouchSlider);  // Attach ticker to update touch slider
+}
+```
+
+### Implement Rest of Your Code
+The updateTouchSlider() function will be called every SLIDER_INTERVAL (In this example, 200 ms), independently of the rest of the code
+
+```cpp
+void loop() {
+  // Rest of the code
+  /*
+  ...
+  ...
+  */
+
+  // The updateTouchSlider() function will be called every SLIDER_INTERVAL (In this example, 200 ms), independently of the rest of the code
+}
+
+```
 
 ## Documentation
 ### Static Members Initialization
@@ -287,10 +489,12 @@ By default, an initial configuration is set when creating the `TouchSlider` obje
 #define START_WITH_SWIPE_FINE                 // Enable swipe fine by default, comment this line to disable
 #define START_PRINT_SWIPE_STATUS              // Print the swipe status by default, comment this line to disable
 #define START_PRINT_SLIDER_TOUCHED            // Print the slider touched by default, comment this line to disable
-// #define START_WITH_TOUCH_BUTTONS              // Disable touch buttons by default, comment this line to enable
+// #define START_WITH_TOUCH_BUTTONS              // Enable touch buttons by default, comment this line to disable
+// #define START_PRINT_TOUCH_BUTTONS             // Enable print touch buttons by default, comment this line to disable
 ```
 
 ### Public Functions
+### Enable/Disable Functions
 
 #### Enable/Disable Functions
 
@@ -314,11 +518,46 @@ By default, an initial configuration is set when creating the `TouchSlider` obje
 - `void disablePrintSliderTouched() {_enablePrintSliderTouched = false;};`
   Disables printing when the slider is touched.
 
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/56531ab0-d2e4-4557-abae-a691a1926588" alt="Serial Print Swipe Up">
+  <br>
+  <em>Serial Print Swipe Up</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/a9c92547-2aaf-4f80-b8ef-74de89d3f47d" alt="Serial Print Swipe Down">
+  <br>
+  <em>Serial Print Swipe Down</em>
+</p>
+
+
 - `void enablePrintSwipeStatus() {_enablePrintSwipeStatus = true;};`
   Enables printing the swipe status, including fine swipe status.
 
 - `void disablePrintSwipeStatus() {_enablePrintSwipeStatus = false;};`
   Disables printing the swipe status, including fine swipe status.
+
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/e5b5de23-77df-4473-93aa-1cd599fabfce" alt="Serial Print First Touch Bot">
+  <br>
+  <em>Serial Print First Touch Bot</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/575d27f9-27fe-4838-b182-4ccd18fe21ed" alt="Serial Print First Touch Top">
+  <br>
+  <em>Serial Print First Touch Top</em>
+</p>
+
+
+- `void enablePrintButtonTouched() {_enablePrintButtonTouched = true;};`
+  Enables printing the array of buttons touched and the button that was short-pressed.
+
+- `void disablePrintButtonTouched() {_enablePrintButtonTouched = false;};`
+  Disables printing the array of buttons touched and the button that was short-pressed.
+
+### Touch Button Functions
+These functionalities are basic and primarily used to detect the press of a touch pad separate from the touch slider. They are not intended to replace more complex functions or libraries dedicated solely to button operations, such as double press, short press, long press, or even press duration measurement. Utilize these functions in this library if you need a simple touch button to perform a straightforward action.These functionalities are basic and primarily used to detect the press of a touch pad separate from the touch slider. They are not intended to replace more complex functions or libraries dedicated solely to button operations, such as double press, short press, long press, or even press duration measurement. Utilize these functions in this library if you need a simple touch button to perform a straightforward action.
 
 #### `void addTouchButton(gpio_num_t buttonPin, uint8_t thresholdPercent)`
 
@@ -339,25 +578,120 @@ By default, an initial configuration is set when creating the `TouchSlider` obje
   - Checks if there are touch buttons to remove.
   - Shifts the remaining buttons in the list one position to the left after removal.
 
-  
+### Start/Stop/Resume Functions
 
-![ezgif-6-d856cbd844](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/449c4ea8-9ca7-4ee6-bcf4-e3a0c1acb749)
+#### `void start()`
 
-![ezgif-1-a3cf8d0dc4](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/2be7a1b3-af98-4152-99bd-f215ecb79216)
+- **Description**: Initializes and starts the touch slider by setting up the touch pads and beginning the slider operation.
+- **Notes**:
+  - Sets the touch threshold for each slider pad based on the configuration.
+  - Configures the touch pads for buttons using `_buttonThresholdPercent`.
+  - Begins the touch slider operation.
+  - This function should be called after all touch buttons are added.
 
-![ezgif-1-b48388dd4f](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/3deb8406-5ad6-4c2e-92e4-4006fb7e913b)
+#### `void stop()`
 
-![ezgif-1-6feeaae81e](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/5694b665-06cd-4d10-ae8c-2245c9769ffe)
+- **Description**: Stops the timer responsible for updating the touch slider.
+- **Notes**:
+  - Stops the timer if it is running.
+  - Detaches the timer, marking that the slider is not currently running.
 
-![ezgif-6-544cf5d29b](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/e5b5de23-77df-4473-93aa-1cd599fabfce)
+#### `void resume()`
 
-![ezgif-6-c68d5f4a55](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/575d27f9-27fe-4838-b182-4ccd18fe21ed)
+- **Description**: Resumes the timer for updating the touch slider.
+- **Notes**:
+  - Attaches the timer if it is not currently running.
+  - Marks that the timer is running, resuming the slider operation.
 
-![ezgif-6-c09614a6ef](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/56531ab0-d2e4-4557-abae-a691a1926588)
+### Calibration Thresholds
 
-![ezgif-6-7ddadf4589](https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/a9c92547-2aaf-4f80-b8ef-74de89d3f47d)
+#### `void calibrate_thresholds()`
+
+- **Description**: Calibrates the touch pad thresholds by reading the filtered touch values and calculating the thresholds based on a specified percentage.
+- **Parameters**: None.
+- **Notes**:
+  - Iterates over all touch pads and reads the filtered touch value for each enabled touch pad.
+  - Calculates and stores the threshold for each touch pad based on a percentage of the touch value.
+  - Logs the calibrated threshold for reference.
+
+  ### Getters
+
+#### `int8_t getSwipeStatus()`
+
+- **Description**: Retrieves the swipe status, calculated as the difference between the counts of swipe-down and swipe-up gestures, and resets the swipe counts after retrieval.
+- **Returns**: 
+  - An `int8_t` value representing the swipe status.
+  - Positive values indicate swipe-down gestures.
+  - Negative values indicate swipe-up gestures.
+  - `0` indicates no swipe.
+
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/3deb8406-5ad6-4c2e-92e4-4006fb7e913b" alt="SwipeUp">
+  <br>
+  <em>SwipeUp</em>
+</p>
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/5694b665-06cd-4d10-ae8c-2245c9769ffe" alt="SwipeDown">
+  <br>
+  <em>SwipeDown</em>
+</p>
+
+#### `int8_t getSwipeStatusFine()`
+
+- **Description**: Retrieves the fine swipe status, calculated as the difference between the counts of fine swipe-down and fine swipe-up gestures, and resets the swipe counts after retrieval.
+- **Returns**: 
+  - An `int8_t` value representing the fine swipe status.
+  - Positive values indicate fine swipe-down gestures.
+  - Negative values indicate fine swipe-up gestures.
+  - `0` indicates no fine swipe.
+- **Notes**: 
+  - If fine swipe is disabled, it returns `0` and prints a message to enable fine swipe using `enableSwipeFine()`.
+
+<p align="center">
+  <img src="https://github.com/MarcosCarballoV/TouchSlider_TouchButton_Functionalities/assets/139102752/2be7a1b3-af98-4152-99bd-f215ecb79216" alt="SwipeFine">
+  <br>
+  <em>SwipeFine</em>
+</p>
+
+#### `gpio_num_t getButtonShortPress()`
+
+- **Description**: Retrieves the GPIO pin of the button that was short-pressed and resets the flag.
+- **Returns**: 
+  - The `gpio_num_t` of the button that was short-pressed.
+  - `GPIO_NUM_NC` if no button was short-pressed.
+- **Notes**: 
+  - If touch buttons are disabled, it returns `GPIO_NUM_NC` and prints a message to enable touch buttons using `enableTouchButtons()`.
+
+#### `bool getSliderRunning()`
+
+- **Description**: Retrieves the running status of the slider.
+- **Returns**: 
+  - `true` if the slider is running.
+  - `false` if the slider is not running.
+
+#### `bool isTouchButtonPressed(gpio_num_t buttonPin)`
+
+- **Description**: Checks if a touch button is pressed.
+- **Parameters**:
+  - `buttonPin`: The `gpio_num_t` of the button.
+- **Returns**: 
+  - `true` if the button pin is pressed.
+  - `false` if the button pin is not in the list of touch buttons or is not pressed.
+
+#### `bool isTouchSliderPressed(gpio_num_t sliderPin)`
+
+- **Description**: Checks if a touch slider pin is pressed.
+- **Parameters**:
+  - `sliderPin`: The `gpio_num_t` of the slider.
+- **Returns**: 
+  - `true` if the slider pin is touched.
+  - `false` if the slider pin is not in the list of touch sliders or is not touched.
+
+#### `void getSliderTouched(bool sliderTouched[], uint8_t numSliderPins)`
+
+- **Description**: Retrieves the slider touched status and stores it in the provided array.
+- **Parameters**:
+  - `sliderTouched`: The array to store the slider touched status.
+  - `numSliderPins`: The number of slider pins.
 
 
-## Screenshots
-
-![App Screenshot](hhttps://drive.google.com/file/d/1sY6Vhcrc-_1MmUfvtkOrQRgmqNd5wrY2/view?usp=sharing)
