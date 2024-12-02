@@ -1,6 +1,6 @@
 # TouchSlider Library for ESP32
 [![PlatformIO](https://img.shields.io/badge/PlatformIO-5.2.1-blue.svg)](https://platformio.org/)
-[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/tu_usuario/tu_repositorio)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/MarcosCarballoV/TouchSlider_ESP32)
 
 ## Overview
 The TouchSlider library is designed for ESP32 modules equipped with touch pins. It leverages these capabilities to create an array of touch pads that act as a slider, detecting the direction and position of a finger slide. The library includes features such as sensitivity adjustment, accurate detection, timer-based updates and readings, pause and resume functionalities, and the ability to detect touch on specific pads for unique functions.
