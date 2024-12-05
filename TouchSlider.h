@@ -1,3 +1,9 @@
+/*
+* Marcos Abraham Carballo Vazquez
+* Original Creation Date: Dicember 5, 2024
+* https://github.com/MarcosCarballoV/TouchSlider_ESP32
+* */
+
 #ifndef TOUCHSLIDER_H
 #define TOUCHSLIDER_H
 

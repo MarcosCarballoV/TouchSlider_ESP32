@@ -359,6 +359,7 @@ void TouchSlider::setDefaultConfiguration()
  */
 void TouchSlider::begin() {
   log_i("Initializing touch slider...");
+  _sliderRunning = true;      // Mark that the slider is running
 
   for (uint8_t i = 0; i < TOUCH_PAD_MAX; ++i) {     // Configure enabled touch pads with the specified inactive threshold
     if (_padEnabled[i]) {
